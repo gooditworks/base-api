@@ -3,3 +3,6 @@
 /.vercel
 /.next
 /.env
+/build
+
+.vercel
