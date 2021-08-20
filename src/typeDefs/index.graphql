@@ -1,7 +1,17 @@
 type Query {
-  greeting(name: String!): String
+  """
+  Hello world запрос.
+  Возращает строку `Hello, $name`
+  """
+  greeting(
+    "Имя, которое будет встроено в результирующую строку"
+    name: String!
+  ): String
 }
 
 type Mutation {
+  """
+  Вызывает `console.log("noop") и возвращает магическое число`
+  """
   noop: Int
 }
