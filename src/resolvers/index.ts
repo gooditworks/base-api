@@ -1,7 +1,7 @@
 import greeting from "./greeting"
 
 const resolvers = {
-  Query: {greeting}
+  greeting
 }
 
 export default resolvers

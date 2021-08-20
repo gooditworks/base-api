@@ -2,12 +2,16 @@ import {VercelApiHandler} from "@vercel/node"
 import {ApolloServer} from "apollo-server-micro"
 import {ApolloServerPluginLandingPageGraphQLPlayground} from "apollo-server-core"
 
-import resolvers from "../src/resolvers"
+import queryResolvers from "../src/resolvers"
+import mutationResolvers from "../src/mutations"
 import typeDefs from "../src/typeDefs"
 
 const server = new ApolloServer({
-  resolvers,
   typeDefs,
+  resolvers: {
+    Query: queryResolvers,
+    Mutation: mutationResolvers
+  },
   plugins: [ApolloServerPluginLandingPageGraphQLPlayground()]
 })
 
