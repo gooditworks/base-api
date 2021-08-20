@@ -29,7 +29,7 @@ export type Query = {
 
 
 export type QueryGreetingArgs = {
-  name: Maybe<Scalars['String']>;
+  name: Scalars['String'];
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -123,7 +123,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
 }>;
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
-  greeting: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, RequireFields<QueryGreetingArgs, never>>;
+  greeting: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, RequireFields<QueryGreetingArgs, 'name'>>;
 }>;
 
 export type Resolvers<ContextType = any> = ResolversObject<{
