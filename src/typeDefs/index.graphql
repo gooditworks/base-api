@@ -11,7 +11,7 @@ type Query {
 
 type Mutation {
   """
-  Вызывает `console.log("noop") и возвращает магическое число`
+  Вызывает `console.log("noop")` и возвращает магическое число
   """
   noop: Int
 }
