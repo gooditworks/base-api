@@ -1,0 +1,7 @@
+type Query {
+  greeting(name: String): String
+}
+
+type Mutation {
+  noop: Int
+}

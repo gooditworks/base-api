@@ -1,12 +1,13 @@
-import {gql} from "apollo-server-micro"
+import {join} from "path"
+import {compact} from "lodash"
 
-const typeDefs = gql`
-  type Query {
-    greeting(name: String): String
-  }
-  type Mutation {
-    noop: Int
-  }
-`
+import {loadTypedefsSync} from "@graphql-tools/load"
+import {GraphQLFileLoader} from "@graphql-tools/graphql-file-loader"
 
-export default typeDefs
+const typeDefs = loadTypedefsSync(join(__dirname, "index.graphql"), {
+  loaders: [new GraphQLFileLoader()]
+})
+
+const documents = typeDefs.map(source => source.document)
+
+export default compact(documents)

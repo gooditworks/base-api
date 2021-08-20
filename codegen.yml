@@ -1,0 +1,15 @@
+overwrite: true
+schema: src/typeDefs/index.graphql
+generates:
+  src/types.ts:
+    config:
+      avoidOptionals: true
+      useIndexSignature: true
+    plugins:
+      - typescript
+      - typescript-resolvers
+      - add:
+          content:
+            - "/* eslint-disable */"
+            - "/* prettier-ignore */"
+            - "// @ts-nocheck"

@@ -1,6 +1,10 @@
 /* eslint-disable no-console */
 
-const noop = () => {
+import {MutationResolvers} from "../types"
+
+type NoopMutation = MutationResolvers["noop"]
+
+const noop: NoopMutation = () => {
   console.log("noop")
 
   return 42

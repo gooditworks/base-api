@@ -1,6 +1,8 @@
+import {QueryResolvers} from "../types"
+
 import greeting from "./greeting"
 
-const resolvers = {
+const resolvers: QueryResolvers = {
   greeting
 }
 

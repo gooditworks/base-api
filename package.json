@@ -7,6 +7,7 @@
   "license": "MIT",
   "scripts": {
     "postinstall": "sh ./scripts/add_base_remote.sh",
+    "codegen": "graphql-codegen --config codegen.yml",
     "lint": "concurrently -c green \"npm:lint:*\"",
     "lint:base": "sh ./scripts/check_base_update.sh",
     "lint:typecheck": "tsc --noEmit --project tsconfig.json",
@@ -20,7 +21,12 @@
     "@arkweid/lefthook": "^0.7.6",
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
+    "@graphql-codegen/add": "^3.1.0",
+    "@graphql-codegen/cli": "^2.1.0",
+    "@graphql-codegen/typescript": "^2.1.0",
+    "@graphql-codegen/typescript-resolvers": "^2.1.0",
     "@types/jest": "^26.0.23",
+    "@types/lodash": "^4.14.172",
     "@typescript-eslint/eslint-plugin": "^4.26.1",
     "@typescript-eslint/parser": "^4.26.1",
     "commitizen": "^4.2.4",
@@ -37,8 +43,12 @@
     "typescript": "^4.3.2"
   },
   "dependencies": {
+    "@graphql-tools/graphql-file-loader": "^7.0.5",
+    "@graphql-tools/load": "^7.1.8",
     "@vercel/node": "^1.12.1",
     "apollo-server-core": "^3.1.2",
-    "apollo-server-micro": "^3.1.2"
+    "apollo-server-micro": "^3.1.2",
+    "graphql": "^15.5.1",
+    "lodash": "^4.17.21"
   }
 }

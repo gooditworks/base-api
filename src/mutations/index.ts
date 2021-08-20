@@ -1,6 +1,8 @@
+import {MutationResolvers} from "../types"
+
 import noop from "./noop"
 
-const mutations = {
+const mutations: MutationResolvers = {
   noop
 }
 
