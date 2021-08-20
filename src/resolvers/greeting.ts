@@ -1,6 +1,6 @@
-import {QueryResolvers} from "../types"
+import {ResolverHandler, QueryResolvers} from "../types"
 
-type GreetingResolver = QueryResolvers["greeting"]
+type GreetingResolver = ResolverHandler<QueryResolvers["greeting"]>
 
 const greeting: GreetingResolver = (_, {name}) => {
   return `Hello, ${name}`

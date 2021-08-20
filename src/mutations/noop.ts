@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 
-import {MutationResolvers} from "../types"
+import {ResolverHandler, MutationResolvers} from "../types"
 
-type NoopMutation = MutationResolvers["noop"]
+type NoopMutation = ResolverHandler<MutationResolvers["noop"]>
 
 const noop: NoopMutation = () => {
   console.log("noop")

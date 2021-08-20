@@ -13,3 +13,4 @@ generates:
             - "/* eslint-disable */"
             - "/* prettier-ignore */"
             - "// @ts-nocheck"
+            - "export type ResolverHandler<T> = Extract<T, Function>"
