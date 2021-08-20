@@ -11,7 +11,8 @@ const server = new ApolloServer({
     Query: queryResolvers,
     Mutation: mutationResolvers
   },
-  plugins: [ApolloServerPluginLandingPageGraphQLPlayground()]
+  plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
+  introspection: true
 })
 
 export default server
