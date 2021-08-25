@@ -1,9 +1,11 @@
 module.exports = {
   preset: "ts-jest",
   testEnvironment: "node",
+  testMatch: ["**/?(*.)+(test).ts", "**/tests/**.ts"],
+  resolver: "<rootDir>/jest.resolver.cjs",
   globals: {
     "ts-jest": {
-      tsConfig: "<rootDir>/tsconfig.jest.json"
+      tsconfig: "tsconfig.jest.json"
     }
   }
 }
