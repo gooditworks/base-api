@@ -1,6 +1,6 @@
 # Создаёт git remote на базовый репозиторий, если его (remote) ещё нет
 
-export BASE_REMOTE_URL=git@github.com:gooditcollective/base.git
+export BASE_REMOTE_URL=git@github.com:gooditcollective/base-api.git
 
 # если мы НЕ в CI (github actions, vercel)
 if [ -z "$CI" ]; then
