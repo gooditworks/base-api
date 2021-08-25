@@ -5,7 +5,7 @@ import queryResolvers from "./resolvers"
 import mutationResolvers from "./mutations"
 import typeDefs from "./typeDefs"
 
-import "./monitoring"
+import ApolloMonitoringPlugin from "./monitoring"
 
 const server = new ApolloServer({
   typeDefs,
@@ -13,7 +13,7 @@ const server = new ApolloServer({
     Query: queryResolvers,
     Mutation: mutationResolvers
   },
-  plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
+  plugins: [ApolloMonitoringPlugin, ApolloServerPluginLandingPageGraphQLPlayground()],
   introspection: true
 })
 
