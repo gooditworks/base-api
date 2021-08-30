@@ -15,7 +15,7 @@
     "lint:typecheck": "tsc --noEmit --project tsconfig.json",
     "lint:ts": "eslint --ext .ts,.tsx .",
     "test": "concurrently -c green \"npm:test:*\"",
-    "test:unit": "jest",
+    "test:unit": "jest --silent",
     "release": "standard-version",
     "commit": "git add . && cz"
   },
@@ -41,6 +41,7 @@
     "eslint-config-airbnb-base-ts": "^14.1.1",
     "eslint-plugin-jest": "^24.3.6",
     "jest": "^27.0.4",
+    "jest-junit": "^12.2.0",
     "nodemon": "^2.0.12",
     "prettier": "^2.3.1",
     "standard-version": "^9.3.1",

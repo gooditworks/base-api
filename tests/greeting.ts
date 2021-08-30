@@ -2,6 +2,8 @@ import {gql} from "apollo-server-core"
 
 import server from "../src/server"
 
+jest.useFakeTimers()
+
 const GREETING_QUERY = gql`
   query ($name: String!) {
     greeting(name: $name)
