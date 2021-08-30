@@ -2,7 +2,7 @@
   "name": "gooditworks_base_api",
   "version": "0.1.0",
   "description": "Gooditworks base project for GraphQL API",
-  "repository": "https://github.com/gooditworks/base",
+  "repository": "https://github.com/gooditworks/base-api",
   "author": "Max Eliseev <mxseev@gmail.com>",
   "license": "MIT",
   "scripts": {
