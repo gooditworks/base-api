@@ -18,7 +18,7 @@
 ### Env переменные
 Для полноценной работы приложения необходимо заполнить следующие env переменные (через командную строку или `.env` файл):
 ```
-IS_PRODUCTION=<true только на production в Vercel, в остальных случаях отсутствует>
+LOG_LEVEL=<"trace" | "debug" | "info" | "warn" | "error" | "fatal"> (по-умолчанию "trace")
 SENTRY_DSN=<DSN URL от Sentry>
 LOGDNA_KEY=<ключ от logDNA>
 ```

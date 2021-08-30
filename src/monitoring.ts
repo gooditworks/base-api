@@ -29,11 +29,18 @@ if (env.sentryDsn) {
   exceptionCapturers.push(sentryCapturer)
 }
 
-const minimalLogLevel = env.isProduction ? LogLevel.Info : undefined
+const logLevels: Record<string, LogLevel> = {
+  trace: LogLevel.Trace,
+  debug: LogLevel.Debug,
+  info: LogLevel.Info,
+  warn: LogLevel.Warn,
+  error: LogLevel.Error,
+  fatal: LogLevel.Fatal
+}
 
 initMonitoring({
   logger: {
-    minimalLogLevel,
+    minimalLogLevel: logLevels[env.logLevel],
     loggerTransports,
     exceptionCapturers
   }

@@ -3,7 +3,7 @@ import dotenv from "dotenv"
 dotenv.config()
 
 const env = {
-  isProduction: process.env.IS_PRODUCTION,
+  logLevel: process.env.LOG_LEVEL || "trace",
   sentryDsn: process.env.SENTRY_DSN,
   logdnaKey: process.env.LOGDNA_KEY,
   logdnaApp: "base"
