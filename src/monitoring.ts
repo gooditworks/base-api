@@ -1,5 +1,5 @@
 /* eslint-disable class-methods-use-this */
-import initMonitoring, {logger} from "@gooditworks/monitoring"
+import initMonitoring, {LogLevel, logger} from "@gooditworks/monitoring"
 import {ApolloError} from "apollo-server-core"
 import {
   BaseContext,
@@ -29,8 +29,11 @@ if (env.sentryDsn) {
   exceptionCapturers.push(sentryCapturer)
 }
 
+const minimalLogLevel = env.isProduction ? LogLevel.Info : undefined
+
 initMonitoring({
   logger: {
+    minimalLogLevel,
     loggerTransports,
     exceptionCapturers
   }
@@ -38,33 +41,56 @@ initMonitoring({
 
 type GraphQLRequestErrorContext = GraphQLRequestContextDidEncounterErrors<BaseContext>
 
+const logRequest = (startedAt: number) => async (context: GraphQLRequestContext) => {
+  const finishedAt = Date.now()
+  const elapsed = finishedAt - startedAt
+
+  const {operationName, query} = context.request
+  if (operationName === "IntrospectionQuery") {
+    return
+  }
+
+  const variables = JSON.stringify(context.request.variables, null, 2)
+  const response = JSON.stringify(context.response?.data, null, 2)
+
+  // prettier-ignore
+  const lines = [
+    query?.trimEnd(),
+    `Variables: ${variables}`,
+    `Response: ${response}`
+  ]
+
+  logger.info(`Request "${operationName}" completed in ${elapsed}ms`)
+  logger.debug(lines.join("\n"))
+}
+
+const logErrors = async (context: GraphQLRequestErrorContext) => {
+  if (!context.operation) {
+    return
+  }
+
+  context.errors?.forEach(error => {
+    if (error instanceof ApolloError) {
+      return
+    }
+
+    logger.captureException(error, {
+      kind: context.operation?.operation,
+      query: context.request.query,
+      variables: context.request.variables
+    })
+  })
+}
+
 // https://blog.sentry.io/2020/07/22/handling-graphql-errors-using-sentry
 // https://medium.com/@jmagnuss/graphql-apollo-server-plugins-in-typescript-26eb67bb02d4
 const ApolloMonitoringPlugin: ApolloServerPlugin = {
-  async requestDidStart(requestContext: GraphQLRequestContext) {
-    const {operationName, variables} = requestContext.request
-    if (operationName !== "IntrospectionQuery") {
-      logger.info(`${requestContext.request.query}`, {variables})
-    }
+  async requestDidStart() {
+    const startedAt = Date.now()
 
     return {
-      async didEncounterErrors(context: GraphQLRequestErrorContext) {
-        if (!context.operation) {
-          return
-        }
-
-        context.errors?.forEach(error => {
-          if (error instanceof ApolloError) {
-            return
-          }
-
-          logger.captureException(error, {
-            kind: context.operation?.operation,
-            query: context.request.query,
-            variables: context.request.variables
-          })
-        })
-      }
+      willSendResponse: logRequest(startedAt),
+      didEncounterErrors: logErrors
     }
   }
 }
