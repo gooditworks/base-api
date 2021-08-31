@@ -1,0 +1,16 @@
+on:
+  push:
+    branches: [main]
+
+jobs:
+  schema-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: npm install --global @apollo/rover
+      - name: Schema publish
+        env:
+          APOLLO_KEY: ${{ secrets.APOLLO_KEY }}
+          APOLLO_GRAPH_ID: ${{ secrets.APOLLO_GRAPH_ID }}
+        run: |
+          rover graph publish ${{ env.APOLLO_GRAPH_ID }}@current --schema ./src/typeDefs/index.graphql
