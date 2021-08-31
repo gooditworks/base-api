@@ -26,6 +26,8 @@
 LOG_LEVEL=<"trace" | "debug" | "info" | "warn" | "error" | "fatal"> (по-умолчанию "trace")
 SENTRY_DSN=<DSN URL от Sentry>
 LOGDNA_KEY=<ключ от logDNA>
+APOLLO_EXPLORER=<"true" включает локальный GraphQL Explorer, в Production Vercel должен быть выключен>
+APOLLO_INTROSPECTION=<"true" включает интроспекцию, в Production Vercel должен быть выключен>
 ```
 
 Для полноценной интеграции с Apollo Studio также необходимо проставить ещё пару переменных только в Vercel (только в Production сборках):
