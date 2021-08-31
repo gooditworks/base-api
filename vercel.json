@@ -1,4 +1,9 @@
 {
+  "functions": {
+    "api/index.ts": {
+      "includeFiles": "./src/**/*.graphql"
+    }
+  },
   "rewrites": [
     {"source": "/", "destination": "/api/index"},
     {"source": "/:match*", "destination": "/api/:match*"}
