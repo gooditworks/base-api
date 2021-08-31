@@ -12,6 +12,8 @@ jobs:
         with:
           fetch-depth: 2
 
+      - run: npm install --global @apollo/rover
+
       - name: Run schema check
         env:
           APOLLO_KEY: ${{ secrets.APOLLO_KEY }}
