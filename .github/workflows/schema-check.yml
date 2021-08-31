@@ -1,0 +1,22 @@
+# https://www.apollographql.com/docs/studio/github-integration/#github-actions
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  schema-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+
+      - name: Run schema check
+        env:
+          APOLLO_KEY: ${{ secrets.APOLLO_KEY }}
+        run: |
+          rover graph check base-api@current --schema ./src/typeDefs/index.graphql  \
+            --branch=${GITHUB_REF#refs/heads/} \
+            --author=$GITHUB_ACTOR \
+            --commitId=$(git rev-parse $GITHUB_SHA^2)
