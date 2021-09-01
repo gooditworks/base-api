@@ -1,11 +1,10 @@
-introspection:
-  schemaFile: ./src/typeDefs/index.graphql
-
 info:
   title: Base GraphQL API Reference
   description: Documentation for basic base-api
 
 servers:
-  - url: https://base-api-mxseev.vercel.app
-    description: Vercel
-    production: true
+  - url: http://localhost:3000
+    description: Apollo Server
+
+introspection:
+  schemaFile: ./src/typeDefs/index.graphql
