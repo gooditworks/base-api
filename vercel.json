@@ -6,6 +6,7 @@
   },
   "rewrites": [
     {"source": "/", "destination": "/api/index"},
-    {"source": "/:match*", "destination": "/api/:match*"}
+    {"source": "/stylesheets/:match*", "destination": "/docs/stylesheets/:match*"},
+    {"source": "/javascripts/:match*", "destination": "/docs/javascripts/:match*"}
   ]
 }
