@@ -19,11 +19,11 @@
 
 #### `APOLLO_KEY`
 
-API Ключ от Apollo Studio, можно посмотреть в настройках проекта.
+API Ключ от Apollo Studio, можно посмотреть в настройках проекта в Apollo Studio.
 
 #### `APOLLO_GRAPH_ID`
 
-ID графа в Apollo Studio, можно посмотреть в настройках проекта.
+ID графа в Apollo Studio, можно посмотреть в настройках проекта в Apollo Studio.
 
 ## Файловая структура
 
@@ -50,3 +50,15 @@ Development сервер, который запускается через `npm 
 
 #### `src/types.ts`
 Файл с типами из GraphQL, сгенерированный [graphql-codegen](https://www.graphql-code-generator.com), генерация через `npm run codegen`.
+
+## Apollo Studio
+
+[Apollo Studio](https://www.apollographql.com/docs/studio) это сервис от Apollo, который помогает в разработке и поддержке GraphQL API. Его основные фичи:
+
+- Репозиторий GraphQL схем и их версий (ревизий),
+- Удобный GraphQL Explorer с документацией,
+- Отслеживание различных метрик,
+- Проверка схемы на breaking changes,
+- [и другие](https://www.apollographql.com/docs/studio/#studio-features).
+
+Для подключения нужно создать проект в Apollo Studio и добавить [env переменные](docs/development.md#Env%20%D0%BF%D0%B5%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D1%8B%D0%B5) и секреты Github репозитория: `APOLLO_KEY` и `APOLLO_GRAPH_ID`.

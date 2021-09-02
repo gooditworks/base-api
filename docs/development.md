@@ -37,6 +37,8 @@ APOLLO_KEY=<ключ от Apollo Studio>
 APOLLO_GRAPH_ID=<ID графа в Apollo Studio>
 ```
 
+Подробнее о Apollo Studio и его фичах можно почитать в [infrastructure.md](docs/infrastructure.md#Apollo%20Studio).
+
 ### Файл `src/env.ts`
 
 В этом файле (и только в нём) производится чтение env перменных всего приложения, а уже из него они пробрасываются дальше. То есть чтение `process.env` вне этого файла запрещено.
