@@ -1,0 +1,19 @@
+{
+  "OBJECT": {
+    "GreetingResult": {
+      "fields": {
+        "ru": {"documentation": {"example": "Привет, Sergey"}},
+        "en": {"documentation": {"example": "Hello, Sergey"}}
+      }
+    },
+    "Query": {
+      "fields": {
+        "greeting": {
+          "args": {
+            "name": {"documentation": {"example": "Sergey"}}
+          }
+        }
+      }
+    }
+  }
+}

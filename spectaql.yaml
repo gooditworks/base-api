@@ -8,3 +8,4 @@ servers:
 
 introspection:
   schemaFile: ./src/typeDefs/index.graphql
+  metadataFile: ./src/typeDefs/spectaql.json

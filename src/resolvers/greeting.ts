@@ -3,7 +3,12 @@ import {ResolverHandler, QueryResolvers} from "../types"
 type GreetingResolver = ResolverHandler<QueryResolvers["greeting"]>
 
 const greeting: GreetingResolver = (_, {name}) => {
-  return `Hello, ${name}`
+  const result = {
+    ru: `Привет, ${name}`,
+    en: `Hello, ${name}`
+  }
+
+  return result
 }
 
 export default greeting
