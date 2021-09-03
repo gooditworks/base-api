@@ -1,0 +1,23 @@
+info:
+  version: 1.0.0
+  title: Base GraphQL API Reference
+  description: Documentation for basic base-api
+  contact:
+    name: Gooditworks support
+    email: support@gooditworks.ru
+    url: mailto:support@gooditworks.ru
+
+  x-introItems:
+    - title: GraphQL docs
+      url: https://graphql.org/learn
+    - title: Apollo Server docs
+      url: https://www.apollographql.com/docs/apollo-server
+
+servers:
+  - url: https://base-api-gooditworks.vercel.app
+    description: Production Vercel
+    production: true
+
+introspection:
+  schemaFile: ./src/typeDefs/index.graphql
+  metadataFile: ./src/typeDefs/spectaql.json
