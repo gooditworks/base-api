@@ -27,7 +27,7 @@ if (env.vercel && env.apolloKey && env.apolloGraphId) {
 
   plugins.push(
     ApolloServerPluginSchemaReporting({
-      initialDelayMaxMs: 30_000
+      initialDelayMaxMs: 5_000
     })
   )
 }
