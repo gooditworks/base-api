@@ -30,7 +30,7 @@ APOLLO_EXPLORER=<"true" включает локальный GraphQL Explorer, в
 APOLLO_INTROSPECTION=<"true" включает интроспекцию, в Production Vercel должен быть выключен>
 ```
 
-Для полноценной интеграции с Apollo Studio также необходимо проставить ещё пару переменных только в Vercel (только в Production сборках):
+Для полноценной интеграции с Apollo Studio также необходимо проставить ещё пару переменных в Vercel:
 
 ```
 APOLLO_KEY=<ключ от Apollo Studio>
