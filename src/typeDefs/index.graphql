@@ -1,12 +1,20 @@
+"Результат запроса greeting на разных языках"
+type GreetingResult {
+  "Greeting строка на русском языке"
+  ru: String!
+  "Greeting строка на английском языке"
+  en: String!
+}
+
 type Query {
   """
   Hello world запрос.
-  Возращает строку `Hello, $name`
+  Возращает greeting строки на разных языках
   """
   greeting(
-    "Имя, которое будет встроено в результирующую строку"
+    "Имя, которое будет встроено в результирующие строки"
     name: String!
-  ): String
+  ): GreetingResult
 }
 
 type Mutation {

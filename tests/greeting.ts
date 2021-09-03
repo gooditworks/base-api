@@ -6,7 +6,10 @@ jest.useFakeTimers()
 
 const GREETING_QUERY = gql`
   query ($name: String!) {
-    greeting(name: $name)
+    greeting(name: $name) {
+      ru
+      en
+    }
   }
 `
 
@@ -17,5 +20,8 @@ test("greeting query works correctly", async () => {
   })
 
   expect(result.errors).toBeUndefined()
-  expect(result.data?.greeting).toBe("Hello, tester")
+  expect(result.data?.greeting).toEqual({
+    ru: "Привет, tester",
+    en: "Hello, tester"
+  })
 })
