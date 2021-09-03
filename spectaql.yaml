@@ -3,8 +3,9 @@ info:
   description: Documentation for basic base-api
 
 servers:
-  - url: http://localhost:3000
-    description: Apollo Server
+  - url: https://base-api-gooditworks.vercel.app
+    description: Production Vercel
+    production: true
 
 introspection:
   schemaFile: ./src/typeDefs/index.graphql
