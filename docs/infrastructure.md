@@ -2,6 +2,29 @@
 
 В основе проекта используется [Apollo Server](https://www.apollographql.com/docs/apollo-server), настроенный под запуск в [Vercel](https://vercel.com).
 
+## Github Actions
+
+В проекте используются несколько Github Actions (`.github/workflows`):
+- `test-report.yml` - В каждом PR запускает unit тесты (jest) и выводит результаты
+- `schema-check.yml` - В каждом PR сверяет текущую GraphQL схему со схемой в Apollo Studio и падает при eё breaking changes
+- `schema-publish.yml` - При мерже (пуше) в ветку `main` публикует текущую схему в Apollo Studio
+
+### Secrets
+
+Для корректной работы всех Github Actions необходимо в настройках репозитория назначить следующие секреты:
+
+#### `NPM_TOKEN`
+
+Токен от Github Registry, где его взять написано в [@gooditworks/shared](https://github.com/gooditworks/shared#%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5).
+
+#### `APOLLO_KEY`
+
+API Ключ от Apollo Studio, можно посмотреть в настройках проекта в Apollo Studio.
+
+#### `APOLLO_GRAPH_ID`
+
+ID графа в Apollo Studio, можно посмотреть в настройках проекта в Apollo Studio.
+
 ## Файловая структура
 
 #### `api/index.ts`
@@ -27,3 +50,15 @@ Development сервер, который запускается через `npm 
 
 #### `src/types.ts`
 Файл с типами из GraphQL, сгенерированный [graphql-codegen](https://www.graphql-code-generator.com), генерация через `npm run codegen`.
+
+## Apollo Studio
+
+[Apollo Studio](https://www.apollographql.com/docs/studio) это сервис от Apollo, который помогает в разработке и поддержке GraphQL API. Его основные фичи:
+
+- Репозиторий GraphQL схем и их версий (ревизий),
+- Удобный GraphQL Explorer с документацией,
+- Отслеживание различных метрик,
+- Проверка схемы на breaking changes,
+- [и другие](https://www.apollographql.com/docs/studio/#studio-features).
+
+Для подключения нужно создать проект в Apollo Studio и добавить [env переменные](docs/development.md#Env%20%D0%BF%D0%B5%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D1%8B%D0%B5) и секреты Github репозитория: `APOLLO_KEY` и `APOLLO_GRAPH_ID`.
