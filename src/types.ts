@@ -28,6 +28,28 @@ export type GreetingResult = {
   en: Scalars['String'];
 };
 
+/** Результат запроса health */
+export type Health = {
+  __typename?: 'Health';
+  /** Возвращает пустую строку, существует для проверки того, что сам сервис работает */
+  empty: Maybe<Scalars['String']>;
+  slow: Maybe<Scalars['String']>;
+  fail: Maybe<Scalars['String']>;
+};
+
+
+/** Результат запроса health */
+export type HealthSlowArgs = {
+  duration: Scalars['Int'];
+  percent: Scalars['Int'];
+};
+
+
+/** Результат запроса health */
+export type HealthFailArgs = {
+  message: Maybe<Scalars['String']>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   /** Вызывает `console.log("noop")` и возвращает магическое число */
@@ -36,6 +58,8 @@ export type Mutation = {
 
 export type Query = {
   __typename?: 'Query';
+  /** Системные запросы для проверки состояния сервиса и тестирования производительности */
+  health: Maybe<Health>;
   /**
    * Hello world запрос.
    * Возращает greeting строки на разных языках
@@ -120,8 +144,9 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = ResolversObject<{
   GreetingResult: ResolverTypeWrapper<GreetingResult>;
   String: ResolverTypeWrapper<Scalars['String']>;
-  Mutation: ResolverTypeWrapper<{}>;
+  Health: ResolverTypeWrapper<Health>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
+  Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
 }>;
@@ -130,8 +155,9 @@ export type ResolversTypes = ResolversObject<{
 export type ResolversParentTypes = ResolversObject<{
   GreetingResult: GreetingResult;
   String: Scalars['String'];
-  Mutation: {};
+  Health: Health;
   Int: Scalars['Int'];
+  Mutation: {};
   Query: {};
   Boolean: Scalars['Boolean'];
 }>;
@@ -146,16 +172,25 @@ export type GreetingResultResolvers<ContextType = Context, ParentType extends Re
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type HealthResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Health'] = ResolversParentTypes['Health']> = ResolversObject<{
+  empty: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  slow: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, RequireFields<HealthSlowArgs, 'duration' | 'percent'>>;
+  fail: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, RequireFields<HealthFailArgs, never>>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
 export type MutationResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
   noop: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
 }>;
 
 export type QueryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
+  health: Resolver<Maybe<ResolversTypes['Health']>, ParentType, ContextType>;
   greeting: Resolver<Maybe<ResolversTypes['GreetingResult']>, ParentType, ContextType, RequireFields<QueryGreetingArgs, 'name'>>;
 }>;
 
 export type Resolvers<ContextType = Context> = ResolversObject<{
   GreetingResult: GreetingResultResolvers<ContextType>;
+  Health: HealthResolvers<ContextType>;
   Mutation: MutationResolvers<ContextType>;
   Query: QueryResolvers<ContextType>;
 }>;

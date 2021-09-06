@@ -1,6 +1,16 @@
 "Директива, требующая аутентификации спец. ключом (токеном)"
 directive @superuser on FIELD_DEFINITION
 
+"Результат запроса health"
+type Health {
+  "Возвращает пустую строку, существует для проверки того, что сам сервис работает"
+  empty: String
+  # "Медленный запрос, в определенном проценте запросов (percent) делает задержку (duration)"
+  slow(duration: Int!, percent: Int!): String
+  # "Всегда завершается ошибкой, существует для проверки интеграции Sentry"
+  fail(message: String): String
+}
+
 "Результат запроса greeting на разных языках"
 type GreetingResult {
   "Greeting строка на русском языке"
@@ -10,6 +20,11 @@ type GreetingResult {
 }
 
 type Query {
+  """
+  Системные запросы для проверки состояния сервиса и тестирования производительности
+  """
+  health: Health
+
   """
   Hello world запрос.
   Возращает greeting строки на разных языках

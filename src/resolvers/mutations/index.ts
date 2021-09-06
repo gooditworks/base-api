@@ -1,4 +1,4 @@
-import {MutationResolvers} from "../types"
+import {MutationResolvers} from "../../types"
 
 import noop from "./noop"
 

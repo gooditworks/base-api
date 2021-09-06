@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 
-import {ResolverHandler, MutationResolvers} from "../types"
+import {ResolverHandler, MutationResolvers} from "../../types"
 
 type NoopMutation = ResolverHandler<MutationResolvers["noop"]>
 

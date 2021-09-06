@@ -2,7 +2,7 @@
 
 const consoleSpy = jest.spyOn(console, "log")
 
-import {callResolver} from "../utils/testing"
+import {callResolver} from "../../utils/testing"
 import noop from "./noop"
 
 test("noop mutation works correctly", () => {

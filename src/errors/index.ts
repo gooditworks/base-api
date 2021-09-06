@@ -1,3 +1,2 @@
-/* eslint-disable import/prefer-default-export */
-
 export {default as SuperuserError} from "./superuser"
+export {default as ExpectedError} from "./fail"
