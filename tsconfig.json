@@ -10,7 +10,7 @@
     "moduleResolution": "node",
     "module": "commonjs",
     "jsx": "preserve",
-    "target": "es5",
+    "target": "es2016",
     "lib": ["esnext"],
     "strict": true,
     "allowJs": false,

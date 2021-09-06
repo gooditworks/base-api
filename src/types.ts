@@ -2,6 +2,7 @@
 /* prettier-ignore */
 // @ts-nocheck
 import { GraphQLResolveInfo } from 'graphql';
+import { Context } from './src/context';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
@@ -17,9 +18,13 @@ export type Scalars = {
   Float: number;
 };
 
+
+/** Результат запроса greeting на разных языках */
 export type GreetingResult = {
   __typename?: 'GreetingResult';
+  /** Greeting строка на русском языке */
   ru: Scalars['String'];
+  /** Greeting строка на английском языке */
   en: Scalars['String'];
 };
 
@@ -131,23 +136,30 @@ export type ResolversParentTypes = ResolversObject<{
   Boolean: Scalars['Boolean'];
 }>;
 
-export type GreetingResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['GreetingResult'] = ResolversParentTypes['GreetingResult']> = ResolversObject<{
+export type SuperuserDirectiveArgs = {  };
+
+export type SuperuserDirectiveResolver<Result, Parent, ContextType = Context, Args = SuperuserDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
+
+export type GreetingResultResolvers<ContextType = Context, ParentType extends ResolversParentTypes['GreetingResult'] = ResolversParentTypes['GreetingResult']> = ResolversObject<{
   ru: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   en: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
-export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
+export type MutationResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
   noop: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
 }>;
 
-export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
+export type QueryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
   greeting: Resolver<Maybe<ResolversTypes['GreetingResult']>, ParentType, ContextType, RequireFields<QueryGreetingArgs, 'name'>>;
 }>;
 
-export type Resolvers<ContextType = any> = ResolversObject<{
+export type Resolvers<ContextType = Context> = ResolversObject<{
   GreetingResult: GreetingResultResolvers<ContextType>;
   Mutation: MutationResolvers<ContextType>;
   Query: QueryResolvers<ContextType>;
 }>;
 
+export type DirectiveResolvers<ContextType = Context> = ResolversObject<{
+  superuser: SuperuserDirectiveResolver<any, any, ContextType>;
+}>;

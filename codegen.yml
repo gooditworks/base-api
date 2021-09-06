@@ -1,10 +1,11 @@
 overwrite: true
-schema: src/typeDefs/index.graphql
+schema: src/schema/index.graphql
 generates:
   src/types.ts:
     config:
       avoidOptionals: true
       useIndexSignature: true
+      contextType: ./src/context#Context
     plugins:
       - typescript
       - typescript-resolvers

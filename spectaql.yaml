@@ -19,5 +19,5 @@ servers:
     production: true
 
 introspection:
-  schemaFile: ./src/typeDefs/index.graphql
-  metadataFile: ./src/typeDefs/spectaql.json
+  schemaFile: ./src/schema/index.graphql
+  metadataFile: ./src/schema/spectaql.json
