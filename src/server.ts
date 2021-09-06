@@ -6,10 +6,8 @@ import {
 } from "apollo-server-core"
 
 import env from "./env"
-import queryResolvers from "./resolvers"
-import mutationResolvers from "./mutations"
-import typeDefs from "./typeDefs"
-
+import schema from "./schema"
+import context from "./context"
 import ApolloMonitoringPlugin from "./monitoring"
 
 const plugins = [ApolloMonitoringPlugin]
@@ -35,13 +33,10 @@ if (env.vercel && env.apolloKey && env.apolloGraphId) {
 const introspection = env.apolloIntrospection === "true"
 
 const server = new ApolloServer({
+  schema,
   plugins,
-  typeDefs,
-  introspection,
-  resolvers: {
-    Query: queryResolvers,
-    Mutation: mutationResolvers
-  }
+  context,
+  introspection
 })
 
 export default server
