@@ -19,8 +19,7 @@
     "test": "concurrently -c green \"npm:test:*\"",
     "test:unit": "jest --silent",
     "release": "standard-version",
-    "commit": "git add . && cz",
-    "ci:loadtest": "ts-node bin/loadtest.ts"
+    "commit": "git add . && cz"
   },
   "devDependencies": {
     "@arkweid/lefthook": "^0.7.6",
@@ -67,7 +66,6 @@
     "apollo-server-plugin-base": "^3.2.0",
     "dotenv": "^10.0.0",
     "graphql": "^15.5.1",
-    "loadtest": "^5.1.2",
     "lodash": "^4.17.21",
     "ts-node": "^10.2.1",
     "typescript": "^4.3.2"

@@ -1,5 +1,5 @@
 {
-  "include": ["src/**/*", "api/**/*", "bin/**/*"],
+  "include": ["src/**/*", "api/**/*"],
   "exclude": ["node_modules", "src/**/*.test.ts"],
   "compilerOptions": {
     "outDir": "build",
