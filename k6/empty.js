@@ -1,7 +1,7 @@
 import http from "k6/http"
 import {check, sleep} from "k6"
 
-const URL = process.env.VERCEL_URL
+const VERCEL_URL = __ENV.VERCEL_URL
 
 const options = {
   stages: [
@@ -22,7 +22,7 @@ const empty = () => {
     "Content-Type": "application/json"
   }
 
-  const response = http.post(URL, body, {headers}).json()
+  const response = http.post(VERCEL_URL, body, {headers}).json()
   check(response, {
     "response valid": r => r.data.health.empty === "void"
   })
