@@ -28,6 +28,7 @@ SENTRY_DSN=<DSN URL от Sentry>
 LOGDNA_KEY=<ключ от logDNA>
 APOLLO_EXPLORER=<"true" включает локальный GraphQL Explorer, в Production Vercel должен быть выключен>
 APOLLO_INTROSPECTION=<"true" включает интроспекцию, в Production Vercel должен быть выключен>
+SUPERUSER_TOKEN=<"secret" токен для авторизации запросов под директивой @superuser>
 ```
 
 Для полноценной интеграции с Apollo Studio также необходимо проставить ещё пару переменных в Vercel:
