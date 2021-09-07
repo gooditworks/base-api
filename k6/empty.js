@@ -1,7 +1,7 @@
 import http from "k6/http"
 import {check, sleep} from "k6"
 
-const VERCEL_URL = __ENV.VERCEL_URL
+const VERCEL_URL = `https://${__ENV.VERCEL_URL}`
 
 const options = {
   stages: [
