@@ -22,9 +22,8 @@ const empty = () => {
     "Content-Type": "application/json"
   }
 
-  const response = http.post(VERCEL_URL, body, {headers})
-  console.log(response.body)
-  check(response.json(), {
+  const response = http.post(VERCEL_URL, body, {headers}).json()
+  check(response, {
     "response valid": r => r.data.health.empty === "void"
   })
 
