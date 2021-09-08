@@ -61,3 +61,10 @@ Development сервер, который запускается через `npm 
 - [и другие](https://www.apollographql.com/docs/studio/#studio-features).
 
 Для подключения нужно создать проект в Apollo Studio и добавить [env переменные](docs/development.md#Env%20%D0%BF%D0%B5%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D1%8B%D0%B5) и секреты Github репозитория: `APOLLO_KEY` и `APOLLO_GRAPH_ID`.
+
+## Стресс тесты с помощью k6
+
+В проект интегрированы стресс тесты на основе [k6](https://k6.io). Для их запуска необходим локально [установленный k6](https://k6.io/docs/getting-started/installation). Cкрипты лежат в папке `/k6` и запускаются с помощью npm команды `k6` с ключом `--url`, например:
+```
+$ npm run k6 --url=base-api-gooditworks.vercel.app
+```

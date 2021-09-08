@@ -19,7 +19,8 @@
     "test": "concurrently -c green \"npm:test:*\"",
     "test:unit": "jest --silent",
     "release": "standard-version",
-    "commit": "git add . && cz"
+    "commit": "git add . && cz",
+    "k6": "k6 run k6/index.js"
   },
   "devDependencies": {
     "@arkweid/lefthook": "^0.7.6",
