@@ -17,12 +17,12 @@ type Query {
   greeting(
     "Имя, которое будет встроено в результирующие строки"
     name: String!
-  ): GreetingResult
+  ): String
 }
 
 type Mutation {
   """
   Вызывает `console.log("noop")` и возвращает магическое число
   """
-  noop: String @superuser
+  noop: Int @superuser
 }
