@@ -1,0 +1,40 @@
+name: Publish and check schema via Apollo Studio
+
+on:
+  pull_request:
+
+jobs:
+  schema-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get branch name
+        id: branch
+        run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
+
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Install Apollo Rover (cli)
+        run: npm install --global @apollo/rover
+
+      - name: Run schema check
+        run: rover graph publish ${{ env.APOLLO_GRAPH_ID }}@${{ steps.branch.outputs.short_ref }} --schema ./src/schema/index.graphql
+        env:
+          APOLLO_KEY: ${{ secrets.APOLLO_KEY }}
+          APOLLO_GRAPH_ID: ${{ secrets.APOLLO_GRAPH_ID }}
+
+  schema-check:
+    needs: schema-publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Install Apollo Rover (cli)
+        run: npm install --global @apollo/rover
+
+      - name: Run schema check
+        run: rover graph check ${{ env.APOLLO_GRAPH_ID }}@$current --schema ./src/schema/index.graphql
+        env:
+          APOLLO_KEY: ${{ secrets.APOLLO_KEY }}
+          APOLLO_GRAPH_ID: ${{ secrets.APOLLO_GRAPH_ID }}
