@@ -1,4 +1,4 @@
-name: Publish and check schema via Apollo Studio
+name: Publish and check GraphQL schema
 
 on:
   pull_request:
