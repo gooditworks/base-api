@@ -2,7 +2,7 @@ name: Publish current variant of GraphQL schema
 
 on:
   pull_request:
-    types: [ closed ]
+    types: [closed]
 
 jobs:
   schema-publish-and-check:
