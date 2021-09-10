@@ -4,7 +4,7 @@ on:
   pull_request:
 
 jobs:
-  schema-publish:
+  schema-publish-and-check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -13,23 +13,13 @@ jobs:
       - name: Install Apollo Rover (cli)
         run: npm install --global @apollo/rover
 
-      - name: Run schema check
+      - name: Publish schema
         run: rover graph publish ${{ env.APOLLO_GRAPH_ID }}@${{ github.head_ref }} --schema ./src/schema/index.graphql
         env:
           APOLLO_KEY: ${{ secrets.APOLLO_KEY }}
           APOLLO_GRAPH_ID: ${{ secrets.APOLLO_GRAPH_ID }}
 
-  schema-check:
-    needs: schema-publish
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
-
-      - name: Install Apollo Rover (cli)
-        run: npm install --global @apollo/rover
-
-      - name: Run schema check
+      - name: Check schema against current
         run: rover graph check ${{ env.APOLLO_GRAPH_ID }}@$current --schema ./src/schema/index.graphql
         env:
           APOLLO_KEY: ${{ secrets.APOLLO_KEY }}
