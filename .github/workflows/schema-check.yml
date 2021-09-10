@@ -15,4 +15,4 @@ jobs:
           APOLLO_KEY: ${{ secrets.APOLLO_KEY }}
           APOLLO_GRAPH_ID: ${{ secrets.APOLLO_GRAPH_ID }}
         run: |
-          rover graph check ${{ env.APOLLO_GRAPH_ID }}@$current --schema ./src/typeDefs/index.graphql
+          rover graph check ${{ env.APOLLO_GRAPH_ID }}@$current --schema ./src/schema/index.graphql
