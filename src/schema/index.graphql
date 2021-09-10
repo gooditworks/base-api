@@ -16,8 +16,8 @@ type Query {
   """
   greeting(
     "Имя, которое будет встроено в результирующие строки"
-    name: Int!
-  ): GreetingResult
+    name: String!
+  ): String
 }
 
 type Mutation {
