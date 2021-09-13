@@ -6,8 +6,8 @@
 
 В проекте используются несколько Github Actions (`.github/workflows`):
 - `test-report.yml` - В каждом PR запускает unit тесты (jest) и выводит результаты
-- `schema-check.yml` - В каждом PR сверяет текущую GraphQL схему со схемой в Apollo Studio и падает при eё breaking changes
-- `schema-publish.yml` - При мерже (пуше) в ветку `main` публикует текущую схему в Apollo Studio
+- `schema.yml` - В каждом PR публикует новый вариант схемы (с названием ветки), сверяет текущую GraphQL схему со схемой в Apollo Studio и падает при eё breaking changes
+- `schema-current-publish.yml` - При мерже PR публикует `current` вариант схемы в Apollo Studio
 
 ### Secrets
 
