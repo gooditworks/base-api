@@ -1,14 +1,25 @@
 "Директива, требующая аутентификации спец. ключом (токеном)"
 directive @superuser on FIELD_DEFINITION
 
+enum PonyRace {
+  "Земная пони"
+  Earth
+  "Пегас"
+  Pegasus
+  "Единорог"
+  Unicorn
+  "Аликорн"
+  Alicorn
+}
+
 "Пони"
 type Pony {
   "Уникальный идентификатор (ID) пони"
   id: Int!
   "Имя пони"
   name: String!
-  "Раса пони (earth|unicorn|pegasus|alicorn)"
-  race: String!
+  "Раса пони"
+  race: PonyRace!
 }
 
 "Результат запроса greeting на разных языках"
@@ -49,7 +60,7 @@ type Mutation {
   createPony(
     "Имя пони"
     name: String!
-    "Раса пони (earth|unicorn|pegasus|alicorn)"
-    race: String!
+    "Раса пони"
+    race: PonyRace!
   ): Pony
 }

@@ -51,6 +51,18 @@ Development сервер, который запускается через `npm 
 #### `src/types.ts`
 Файл с типами из GraphQL, сгенерированный [graphql-codegen](https://www.graphql-code-generator.com), генерация через `npm run codegen`.
 
+#### `src/prisma.ts`
+Файл с настройкой и инициализацией Prisma ORM.
+
+#### `tests`
+Интеграционные тесты Jest.
+
+#### `prisma`
+Папка со схемой базы данных (т.е. Prisma) и миграциями.
+
+## PlanetScale / Prisma
+В качестве основной базы данных в проекте используется DBaaS [PlanetScale](https://planetscale.com) и ORM [Prisma](https://www.prisma.io).
+
 ## Apollo Studio
 
 [Apollo Studio](https://www.apollographql.com/docs/studio) это сервис от Apollo, который помогает в разработке и поддержке GraphQL API. Его основные фичи:

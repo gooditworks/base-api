@@ -39,7 +39,7 @@ export type Mutation = {
 
 export type MutationCreatePonyArgs = {
   name: Scalars['String'];
-  race: Scalars['String'];
+  race: PonyRace;
 };
 
 /** Пони */
@@ -49,9 +49,19 @@ export type Pony = {
   id: Scalars['Int'];
   /** Имя пони */
   name: Scalars['String'];
-  /** Раса пони (earth|unicorn|pegasus|alicorn) */
-  race: Scalars['String'];
+  /** Раса пони */
+  race: PonyRace;
 };
+
+export type PonyRace =
+  /** Земная пони */
+  | 'Earth'
+  /** Пегас */
+  | 'Pegasus'
+  /** Единорог */
+  | 'Unicorn'
+  /** Аликорн */
+  | 'Alicorn';
 
 export type Query = {
   __typename?: 'Query';
@@ -151,6 +161,7 @@ export type ResolversTypes = ResolversObject<{
   Mutation: ResolverTypeWrapper<{}>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   Pony: ResolverTypeWrapper<Pony>;
+  PonyRace: PonyRace;
   Query: ResolverTypeWrapper<{}>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
 }>;
@@ -184,7 +195,7 @@ export type MutationResolvers<ContextType = Context, ParentType extends Resolver
 export type PonyResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Pony'] = ResolversParentTypes['Pony']> = ResolversObject<{
   id: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   name: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  race: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  race: Resolver<ResolversTypes['PonyRace'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
