@@ -1,6 +1,16 @@
 "Директива, требующая аутентификации спец. ключом (токеном)"
 directive @superuser on FIELD_DEFINITION
 
+"Пони"
+type Pony {
+  "Уникальный идентификатор (ID) пони"
+  id: Int!
+  "Имя пони"
+  name: String!
+  "Раса пони (earth|unicorn|pegasus|alicorn)"
+  race: String!
+}
+
 "Результат запроса greeting на разных языках"
 type GreetingResult {
   "Greeting строка на русском языке"
@@ -18,6 +28,15 @@ type Query {
     "Имя, которое будет встроено в результирующие строки"
     name: String!
   ): GreetingResult
+
+  "Получение пони по ID"
+  pony(
+    "Уникальный идентификатор (ID) пони"
+    id: Int!
+  ): Pony
+
+  "Получение всех поней"
+  ponies: [Pony]
 }
 
 type Mutation {
@@ -25,4 +44,12 @@ type Mutation {
   Вызывает `console.log("noop")` и возвращает магическое число
   """
   noop: Int @superuser
+
+  "Создание пони"
+  createPony(
+    "Имя пони"
+    name: String!
+    "Раса пони (earth|unicorn|pegasus|alicorn)"
+    race: String!
+  ): Pony
 }

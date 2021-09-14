@@ -1,0 +1,6 @@
+-- CreateTable
+CREATE TABLE "Pony" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "name" TEXT NOT NULL,
+    "race" TEXT NOT NULL
+);
