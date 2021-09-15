@@ -4,7 +4,7 @@ const options = {
   vus: 50,
   duration: "1m",
   thresholds: {
-    http_req_failed: ["rate<0.01"],
+    http_req_failed: ["rate<0.05"],
     http_req_duration: ["p(95)<1250"],
   }
 }
@@ -14,7 +14,7 @@ const test = gqlRequest({
   operation: "K6_Realistic",
   query: "query K6_Realistic { health { realistic } }",
   check: {
-    "health.realistic: response valid": data => data.health.realistic === "ok"
+    "health.realistic: response valid": data => data.health.realistic.startsWith("pony count")
   }
 })
 

@@ -1,12 +1,12 @@
-import sleep from "../../utils/sleep"
+import prisma from "../../prisma"
 import {ResolverHandler, HealthResolvers} from "../../types"
 
 type RealisticResolver = ResolverHandler<HealthResolvers["realistic"]>
 
 const realistic: RealisticResolver = async () => {
-  await sleep(Math.random() * 1000) // TODO make query to DB
+  const count = await prisma.pony.count()
 
-  return "ok"
+  return `pony count: ${count}`
 }
 
 export default realistic
