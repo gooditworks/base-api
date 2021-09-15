@@ -4,8 +4,7 @@ import {GraphQLFileLoader} from "@graphql-tools/graphql-file-loader"
 import {makeExecutableSchema} from "@graphql-tools/schema"
 
 import env from "../env"
-import queryResolvers from "../resolvers"
-import mutationResolvers from "../mutations"
+import resolvers from "../resolvers"
 import {superuser} from "../directives"
 
 const typeDefs = loadSchemaSync(join(__dirname, "index.graphql"), {
@@ -14,10 +13,7 @@ const typeDefs = loadSchemaSync(join(__dirname, "index.graphql"), {
 
 const schema = makeExecutableSchema({
   typeDefs,
-  resolvers: {
-    Query: queryResolvers,
-    Mutation: mutationResolvers
-  }
+  resolvers
 })
 
 const withSuperuser = superuser(schema, env.superuserToken)

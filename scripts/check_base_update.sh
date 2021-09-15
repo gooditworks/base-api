@@ -1,3 +1,6 @@
+#!/bin/bash
+set -e
+
 # Проверка обновления base
 
 # если мы НЕ в CI (github actions, vercel)

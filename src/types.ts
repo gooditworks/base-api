@@ -19,6 +19,32 @@ export type Scalars = {
 };
 
 
+/** Результат запроса health */
+export type Health = {
+  __typename?: 'Health';
+  /** Возвращает простую строку ("void") для проверки того, что сам сервис работает */
+  empty: Maybe<Scalars['String']>;
+  /** Медленный запрос, задерживает ответ на duration миллисекунд, а в percent случаях не ответит никогда */
+  slow: Maybe<Scalars['String']>;
+  /** Запрос, имитирующий реальную работу (в первую очередь с базой данных) */
+  realistic: Maybe<Scalars['String']>;
+  /** Всегда завершается ошибкой, существует для проверки интеграции Sentry */
+  fail: Maybe<Scalars['String']>;
+};
+
+
+/** Результат запроса health */
+export type HealthSlowArgs = {
+  duration: Scalars['Int'];
+  percent: Scalars['Int'];
+};
+
+
+/** Результат запроса health */
+export type HealthFailArgs = {
+  message: Maybe<Scalars['String']>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   /** Создание пони */
@@ -58,6 +84,8 @@ export type Query = {
   pony: Maybe<Pony>;
   /** Получение всех поней */
   ponies: Maybe<Array<Maybe<Pony>>>;
+  /** Системные запросы для проверки состояния сервиса и тестирования производительности */
+  health: Maybe<Health>;
 };
 
 
@@ -135,10 +163,11 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = ResolversObject<{
-  Mutation: ResolverTypeWrapper<{}>;
+  Health: ResolverTypeWrapper<Health>;
   String: ResolverTypeWrapper<Scalars['String']>;
-  Pony: ResolverTypeWrapper<Pony>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
+  Mutation: ResolverTypeWrapper<{}>;
+  Pony: ResolverTypeWrapper<Pony>;
   PonyRace: PonyRace;
   Query: ResolverTypeWrapper<{}>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
@@ -146,10 +175,11 @@ export type ResolversTypes = ResolversObject<{
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = ResolversObject<{
-  Mutation: {};
+  Health: Health;
   String: Scalars['String'];
-  Pony: Pony;
   Int: Scalars['Int'];
+  Mutation: {};
+  Pony: Pony;
   Query: {};
   Boolean: Scalars['Boolean'];
 }>;
@@ -157,6 +187,14 @@ export type ResolversParentTypes = ResolversObject<{
 export type SuperuserDirectiveArgs = {  };
 
 export type SuperuserDirectiveResolver<Result, Parent, ContextType = Context, Args = SuperuserDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
+
+export type HealthResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Health'] = ResolversParentTypes['Health']> = ResolversObject<{
+  empty: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  slow: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, RequireFields<HealthSlowArgs, 'duration' | 'percent'>>;
+  realistic: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  fail: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, RequireFields<HealthFailArgs, never>>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
 
 export type MutationResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
   createPony: Resolver<Maybe<ResolversTypes['Pony']>, ParentType, ContextType, RequireFields<MutationCreatePonyArgs, 'name' | 'race'>>;
@@ -172,9 +210,11 @@ export type PonyResolvers<ContextType = Context, ParentType extends ResolversPar
 export type QueryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
   pony: Resolver<Maybe<ResolversTypes['Pony']>, ParentType, ContextType, RequireFields<QueryPonyArgs, 'id'>>;
   ponies: Resolver<Maybe<Array<Maybe<ResolversTypes['Pony']>>>, ParentType, ContextType>;
+  health: Resolver<Maybe<ResolversTypes['Health']>, ParentType, ContextType>;
 }>;
 
 export type Resolvers<ContextType = Context> = ResolversObject<{
+  Health: HealthResolvers<ContextType>;
   Mutation: MutationResolvers<ContextType>;
   Pony: PonyResolvers<ContextType>;
   Query: QueryResolvers<ContextType>;
