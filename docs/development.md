@@ -15,6 +15,18 @@
 3. Не бампая версию вручную, запустить `standard-version`: `npm run release`
 4. Запушить созданный changelog: `git push`
 
+## Изменение схемы базы данных (миграция)
+
+1. Через web-интерфейс PlanetScale создать новую ветку (branch).
+2. Там же получить реквезиты новой ветки (`DATABASE_URL`): на странице ветки Connect > Passwords > New Password > Format: Prisma > скопировать connection url (`mysql://...`)
+3. Изменить эти реквезиты (`DATABASE_URL`) в `.env` файле
+4. Изменить схему в файле `prisma/schema.prisma`
+5. Сгененрировать и начать миграцию в PlanetScale: `npm run prisma:migrate -- --name <имя миграции>`
+6. Обновить `@prisma/client`: `npm run prisma:generate`
+6. Создать Deploy Request в PlanetScale: открыть страницу ветки, нажать Create deploy request
+7. В Vercel деплоях текущей _git_ ветки проставить `DATABASE_URL` новой PlanetScale ветки
+8. Перед релизом (merge в _git_ `main` ветку) применить Deploy Request в PlanetScale 
+
 ## Env переменные
 
 Для полноценной работы приложения необходимо заполнить следующие env переменные (через командную строку или `.env` файл):
@@ -29,6 +41,8 @@ LOGDNA_KEY=<ключ от logDNA>
 APOLLO_EXPLORER=<"true" включает локальный GraphQL Explorer, в Production Vercel должен быть выключен>
 APOLLO_INTROSPECTION=<"true" включает интроспекцию, в Production Vercel должен быть выключен>
 CORS_ORIGINS=<CORS URL разделенные запятой, для работы Apollo Studio должен включать "https://studio.apollographql.com">
+DATABASE_URL=<connection url от PlanetScale>
+SHADOW_DATABASE_URL=<connection url от shadow ветки в PlanetScale, нужен только при локальной разработке>
 ```
 
 Для полноценной интеграции с Apollo Studio также необходимо проставить ещё пару переменных в Vercel:

@@ -5,6 +5,7 @@ generates:
     config:
       avoidOptionals: true
       useIndexSignature: true
+      enumsAsTypes: true
       contextType: ./src/context#Context
     plugins:
       - typescript
