@@ -1,11 +1,16 @@
-import {QueryResolvers} from "../types"
-
+import mutations from "../mutations"
+import health from "./health"
 import ponies from "./ponies"
 import pony from "./pony"
 
-const resolvers: QueryResolvers = {
-  ponies,
-  pony
+const resolvers = {
+  Health: health,
+  Mutation: mutations,
+  Query: {
+    health: () => ({}),
+    ponies,
+    pony
+  }
 }
 
 export default resolvers
