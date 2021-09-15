@@ -19,19 +19,8 @@ export type Scalars = {
 };
 
 
-/** Результат запроса greeting на разных языках */
-export type GreetingResult = {
-  __typename?: 'GreetingResult';
-  /** Greeting строка на русском языке */
-  ru: Scalars['String'];
-  /** Greeting строка на английском языке */
-  en: Scalars['String'];
-};
-
 export type Mutation = {
   __typename?: 'Mutation';
-  /** Вызывает `console.log("noop")` и возвращает магическое число */
-  noop: Maybe<Scalars['Int']>;
   /** Создание пони */
   createPony: Maybe<Pony>;
 };
@@ -65,20 +54,10 @@ export type PonyRace =
 
 export type Query = {
   __typename?: 'Query';
-  /**
-   * Hello world запрос.
-   * Возращает greeting строки на разных языках
-   */
-  greeting: Maybe<GreetingResult>;
   /** Получение пони по ID */
   pony: Maybe<Pony>;
   /** Получение всех поней */
   ponies: Maybe<Array<Maybe<Pony>>>;
-};
-
-
-export type QueryGreetingArgs = {
-  name: Scalars['String'];
 };
 
 
@@ -156,11 +135,10 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = ResolversObject<{
-  GreetingResult: ResolverTypeWrapper<GreetingResult>;
-  String: ResolverTypeWrapper<Scalars['String']>;
   Mutation: ResolverTypeWrapper<{}>;
-  Int: ResolverTypeWrapper<Scalars['Int']>;
+  String: ResolverTypeWrapper<Scalars['String']>;
   Pony: ResolverTypeWrapper<Pony>;
+  Int: ResolverTypeWrapper<Scalars['Int']>;
   PonyRace: PonyRace;
   Query: ResolverTypeWrapper<{}>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
@@ -168,11 +146,10 @@ export type ResolversTypes = ResolversObject<{
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = ResolversObject<{
-  GreetingResult: GreetingResult;
-  String: Scalars['String'];
   Mutation: {};
-  Int: Scalars['Int'];
+  String: Scalars['String'];
   Pony: Pony;
+  Int: Scalars['Int'];
   Query: {};
   Boolean: Scalars['Boolean'];
 }>;
@@ -181,14 +158,7 @@ export type SuperuserDirectiveArgs = {  };
 
 export type SuperuserDirectiveResolver<Result, Parent, ContextType = Context, Args = SuperuserDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
-export type GreetingResultResolvers<ContextType = Context, ParentType extends ResolversParentTypes['GreetingResult'] = ResolversParentTypes['GreetingResult']> = ResolversObject<{
-  ru: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  en: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
 export type MutationResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
-  noop: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   createPony: Resolver<Maybe<ResolversTypes['Pony']>, ParentType, ContextType, RequireFields<MutationCreatePonyArgs, 'name' | 'race'>>;
 }>;
 
@@ -200,13 +170,11 @@ export type PonyResolvers<ContextType = Context, ParentType extends ResolversPar
 }>;
 
 export type QueryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
-  greeting: Resolver<Maybe<ResolversTypes['GreetingResult']>, ParentType, ContextType, RequireFields<QueryGreetingArgs, 'name'>>;
   pony: Resolver<Maybe<ResolversTypes['Pony']>, ParentType, ContextType, RequireFields<QueryPonyArgs, 'id'>>;
   ponies: Resolver<Maybe<Array<Maybe<ResolversTypes['Pony']>>>, ParentType, ContextType>;
 }>;
 
 export type Resolvers<ContextType = Context> = ResolversObject<{
-  GreetingResult: GreetingResultResolvers<ContextType>;
   Mutation: MutationResolvers<ContextType>;
   Pony: PonyResolvers<ContextType>;
   Query: QueryResolvers<ContextType>;

@@ -22,24 +22,7 @@ type Pony {
   race: PonyRace!
 }
 
-"Результат запроса greeting на разных языках"
-type GreetingResult {
-  "Greeting строка на русском языке"
-  ru: String!
-  "Greeting строка на английском языке"
-  en: String!
-}
-
 type Query {
-  """
-  Hello world запрос.
-  Возращает greeting строки на разных языках
-  """
-  greeting(
-    "Имя, которое будет встроено в результирующие строки"
-    name: String!
-  ): GreetingResult
-
   "Получение пони по ID"
   pony(
     "Уникальный идентификатор (ID) пони"
@@ -51,11 +34,6 @@ type Query {
 }
 
 type Mutation {
-  """
-  Вызывает `console.log("noop")` и возвращает магическое число
-  """
-  noop: Int @superuser
-
   "Создание пони"
   createPony(
     "Имя пони"
