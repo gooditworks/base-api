@@ -1,8 +1,7 @@
 import {ApolloServer} from "apollo-server-micro"
 import {
   ApolloServerPluginLandingPageGraphQLPlayground,
-  ApolloServerPluginLandingPageProductionDefault,
-  ApolloServerPluginSchemaReporting
+  ApolloServerPluginLandingPageProductionDefault
 } from "apollo-server-core"
 
 import env from "./env"
@@ -11,6 +10,7 @@ import context from "./context"
 import ApolloMonitoringPlugin from "./monitoring"
 
 const plugins = [ApolloMonitoringPlugin]
+
 if (env.apolloExplorer === "true") {
   plugins.push(ApolloServerPluginLandingPageGraphQLPlayground())
 } else {
@@ -19,15 +19,8 @@ if (env.apolloExplorer === "true") {
 
 if (env.vercel && env.apolloKey && env.apolloGraphId) {
   process.env.APOLLO_GRAPH_VARIANT = env.vercelBranch
-
-  process.env.APOLLO_SERVER_PLATFORM = "vercel"
   process.env.APOLLO_SERVER_USER_VERSION = env.vercelCommit
-
-  plugins.push(
-    ApolloServerPluginSchemaReporting({
-      initialDelayMaxMs: 5_000
-    })
-  )
+  process.env.APOLLO_SERVER_PLATFORM = "vercel"
 }
 
 const introspection = env.apolloIntrospection === "true"

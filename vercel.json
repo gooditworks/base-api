@@ -1,4 +1,5 @@
 {
+  "regions": ["arn"],
   "functions": {
     "api/index.ts": {
       "includeFiles": "./src/**/*.graphql"
