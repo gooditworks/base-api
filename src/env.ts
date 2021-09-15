@@ -23,7 +23,8 @@ const env = {
   vercel: Boolean(process.env.VERCEL),
   vercelBranch: process.env.VERCEL_GIT_COMMIT_REF,
   vercelCommit: process.env.VERCEL_GIT_COMMIT_SHA,
-  superuserToken: requiredEnv("SUPERUSER_TOKEN")
+  superuserToken: requiredEnv("SUPERUSER_TOKEN"),
+  corsOrigins: process.env.CORS_ORIGINS?.split(",") || []
 }
 
 export default env

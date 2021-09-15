@@ -40,6 +40,7 @@ SENTRY_DSN=<DSN URL от Sentry>
 LOGDNA_KEY=<ключ от logDNA>
 APOLLO_EXPLORER=<"true" включает локальный GraphQL Explorer, в Production Vercel должен быть выключен>
 APOLLO_INTROSPECTION=<"true" включает интроспекцию, в Production Vercel должен быть выключен>
+CORS_ORIGINS=<CORS URL разделенные запятой, для работы Apollo Studio должен включать "https://studio.apollographql.com">
 SUPERUSER_TOKEN=<"secret" токен для авторизации запросов под директивой @superuser>
 DATABASE_URL=<connection url от PlanetScale>
 SHADOW_DATABASE_URL=<connection url от shadow ветки в PlanetScale, нужен только при локальной разработке>
