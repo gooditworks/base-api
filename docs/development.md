@@ -17,18 +17,13 @@
 
 ## Изменение схемы базы данных (миграция)
 
-1. Создать новую ветку (branch) в PlanetScale
-  - через web-интерфейс: Branches > New branch
-  - или CLI: `pscale branch create <database> <branch>`
-2. Получить реквезиты новой ветки
-  - через web-интерфейс: открыть страницу ветки, нажать Connect > Generate new password
-  - или CLI: `pscale shell <database> <branch>`
+1. Через web-интерфейс PlanetScale создать новую ветку (branch).
+2. Там же получить реквезиты новой ветки (`DATABASE_URL`): на странице ветки Connect > Passwords > New Password > Format: Prisma > скопировать connection url (`mysql://...`)
 3. Изменить эти реквезиты (`DATABASE_URL`) в `.env` файле
 4. Изменить схему в файле `prisma/schema.prisma`
-5. Сгененрировать и начать миграцию в PlanetScale: `npm run prisma:migrate -- --name <title>`
-6. Создать Deploy Request в PlanetScale
-  - через web-интерфейс: открыть страницу ветки, нажать Create deploy request
-  - или CLI: `pscale deploy-request create <database> <branch>`
+5. Сгененрировать и начать миграцию в PlanetScale: `npm run prisma:migrate -- --name <имя миграции>`
+6. Обновить `@prisma/client`: `npm run prisma:generate`
+6. Создать Deploy Request в PlanetScale: открыть страницу ветки, нажать Create deploy request
 7. В Vercel деплоях текущей _git_ ветки проставить `DATABASE_URL` новой PlanetScale ветки
 8. Перед релизом (merge в _git_ `main` ветку) применить Deploy Request в PlanetScale 
 
