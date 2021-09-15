@@ -66,5 +66,5 @@ Development сервер, который запускается через `npm 
 
 В проект интегрированы стресс тесты на основе [k6](https://k6.io). Для их запуска необходим локально [установленный k6](https://k6.io/docs/getting-started/installation). Cкрипты лежат в папке `/k6` и запускаются с помощью npm команды `k6` с ключом `--url`, например:
 ```
-$ npm run k6 --url=base-api-gooditworks.vercel.app
+$ npm run k6 --url=https://base-api-gooditworks.vercel.app
 ```
