@@ -10,7 +10,7 @@
     "codegen": "graphql-codegen --config codegen.yml",
     "dev": "nodemon",
     "build": "concurrently -c green \"npm:build:*\"",
-    "build:typescript": "tsc",
+    "build:typescript": "npm run prisma:generate && tsc",
     "build:docs": "spectaql spectaql.yaml -t public/docs",
     "lint": "concurrently -c green \"npm:lint:*\"",
     "lint:base": "sh ./scripts/check_base_update.sh",
@@ -18,6 +18,9 @@
     "lint:ts": "eslint --ext .ts,.tsx .",
     "test": "concurrently -c green \"npm:test:*\"",
     "test:unit": "jest --silent",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:studio": "prisma studio",
     "release": "standard-version",
     "commit": "git add . && cz"
   },
@@ -59,6 +62,7 @@
     "@graphql-tools/load": "^7.1.8",
     "@graphql-tools/schema": "^8.2.0",
     "@graphql-tools/utils": "^8.2.2",
+    "@prisma/client": "^3.0.2",
     "@vercel/node": "^1.12.1",
     "apollo-server-core": "^3.1.2",
     "apollo-server-errors": "^3.1.0",
@@ -67,6 +71,7 @@
     "dotenv": "^10.0.0",
     "graphql": "^15.5.1",
     "lodash": "^4.17.21",
+    "prisma": "^3.0.2",
     "ts-node": "^10.2.1",
     "typescript": "^4.3.2"
   }

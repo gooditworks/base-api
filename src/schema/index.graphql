@@ -1,28 +1,44 @@
 "Директива, требующая аутентификации спец. ключом (токеном)"
 directive @superuser on FIELD_DEFINITION
 
-"Результат запроса greeting на разных языках"
-type GreetingResult {
-  "Greeting строка на русском языке"
-  ru: String!
-  "Greeting строка на английском языке"
-  en: String!
+enum PonyRace {
+  "Земная пони"
+  Earth
+  "Пегас"
+  Pegasus
+  "Единорог"
+  Unicorn
+  "Аликорн"
+  Alicorn
+}
+
+"Пони"
+type Pony {
+  "Уникальный идентификатор (ID) пони"
+  id: Int!
+  "Имя пони"
+  name: String!
+  "Раса пони"
+  race: PonyRace!
 }
 
 type Query {
-  """
-  Hello world запрос.
-  Возращает greeting строки на разных языках
-  """
-  greeting(
-    "Имя, которое будет встроено в результирующие строки"
-    name: String!
-  ): GreetingResult
+  "Получение пони по ID"
+  pony(
+    "Уникальный идентификатор (ID) пони"
+    id: Int!
+  ): Pony
+
+  "Получение всех поней"
+  ponies: [Pony]
 }
 
 type Mutation {
-  """
-  Вызывает `console.log("noop")` и возвращает магическое число
-  """
-  noop: Int @superuser
+  "Создание пони"
+  createPony(
+    "Имя пони"
+    name: String!
+    "Раса пони"
+    race: PonyRace!
+  ): Pony
 }
