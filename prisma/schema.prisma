@@ -1,0 +1,24 @@
+datasource db {
+  provider = "mysql"
+  planetScaleMode = true
+  url = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["planetScaleMode"]
+}
+
+enum PonyRace {
+  Earth
+  Pegasus
+  Unicorn
+  Alicorn
+}
+
+model Pony {
+  id Int @id @default(autoincrement())
+  name String
+  race PonyRace
+}

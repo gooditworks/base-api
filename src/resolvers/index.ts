@@ -1,13 +1,15 @@
+import mutations from "../mutations"
 import health from "./health"
-import mutations from "./mutations"
-import greeting from "./greeting"
+import ponies from "./ponies"
+import pony from "./pony"
 
 const resolvers = {
   Health: health,
   Mutation: mutations,
   Query: {
-    greeting,
-    health: () => ({})
+    health: () => ({}),
+    ponies,
+    pony
   }
 }
 
