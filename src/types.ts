@@ -31,9 +31,13 @@ export type GreetingResult = {
 /** Результат запроса health */
 export type Health = {
   __typename?: 'Health';
-  /** Возвращает пустую строку, существует для проверки того, что сам сервис работает */
+  /** Возвращает простую строку ("void") для проверки того, что сам сервис работает */
   empty: Maybe<Scalars['String']>;
+  /** Медленный запрос, задерживает ответ на duration миллисекунд, а в percent случаях не ответит никогда */
   slow: Maybe<Scalars['String']>;
+  /** Запрос, имитирующий реальную работу (в первую очередь с базой данных) */
+  realistic: Maybe<Scalars['String']>;
+  /** Всегда завершается ошибкой, существует для проверки интеграции Sentry */
   fail: Maybe<Scalars['String']>;
 };
 
@@ -175,6 +179,7 @@ export type GreetingResultResolvers<ContextType = Context, ParentType extends Re
 export type HealthResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Health'] = ResolversParentTypes['Health']> = ResolversObject<{
   empty: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   slow: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, RequireFields<HealthSlowArgs, 'duration' | 'percent'>>;
+  realistic: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   fail: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, RequireFields<HealthFailArgs, never>>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
