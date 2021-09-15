@@ -1,4 +1,4 @@
-name: Publish current variant of GraphQL schema
+name: Publish main variant of GraphQL schema
 
 on:
   pull_request:
@@ -15,8 +15,8 @@ jobs:
       - name: Install Apollo Rover (cli)
         run: npm install --global @apollo/rover
 
-      - name: Publish "current" variant of schema
-        run: rover graph publish ${{ env.APOLLO_GRAPH_ID }}@current --schema ./src/schema/index.graphql
+      - name: Publish main variant of schema
+        run: rover graph publish ${{ env.APOLLO_GRAPH_ID }}@main --schema ./src/schema/index.graphql
         env:
           APOLLO_KEY: ${{ secrets.APOLLO_KEY }}
           APOLLO_GRAPH_ID: ${{ secrets.APOLLO_GRAPH_ID }}
