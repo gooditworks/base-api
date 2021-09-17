@@ -21,6 +21,7 @@
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "prisma:studio": "prisma studio",
+    "migrate": "sh ./scripts/migrate.sh",
     "release": "standard-version",
     "commit": "git add . && cz",
     "k6": "concurrently -m 1 -c green \"npm:k6:*\"",
