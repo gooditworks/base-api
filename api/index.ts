@@ -12,8 +12,8 @@ const handler: VercelApiHandler = async (request, response) => {
   const requestOrigin = request.headers.origin || ""
   if (env.corsOrigins.includes(requestOrigin)) {
     response.setHeader("Access-Control-Allow-Origin", requestOrigin)
+    response.setHeader("Access-Control-Allow-Headers", "*")
     response.setHeader("Access-Control-Allow-Credentials", "true")
-    response.setHeader("Access-Control-Allow-Headers", "Content-Type,gcdn-debug")
   }
 
   if (request.method === "OPTIONS") {
