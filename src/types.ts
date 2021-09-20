@@ -19,6 +19,12 @@ export type Scalars = {
 };
 
 
+
+/** Тип Cache-Control */
+export type CacheControlScope =
+  | 'PUBLIC'
+  | 'PRIVATE';
+
 /** Результат запроса health */
 export type Health = {
   __typename?: 'Health';
@@ -163,6 +169,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = ResolversObject<{
+  CacheControlScope: CacheControlScope;
   Health: ResolverTypeWrapper<Health>;
   String: ResolverTypeWrapper<Scalars['String']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
@@ -183,6 +190,12 @@ export type ResolversParentTypes = ResolversObject<{
   Query: {};
   Boolean: Scalars['Boolean'];
 }>;
+
+export type CacheControlDirectiveArgs = {   maxAge: Maybe<Scalars['Int']>;
+  scope: Maybe<CacheControlScope>;
+  inheritMaxAge: Maybe<Scalars['Boolean']>; };
+
+export type CacheControlDirectiveResolver<Result, Parent, ContextType = Context, Args = CacheControlDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
 export type SuperuserDirectiveArgs = {  };
 
@@ -221,5 +234,6 @@ export type Resolvers<ContextType = Context> = ResolversObject<{
 }>;
 
 export type DirectiveResolvers<ContextType = Context> = ResolversObject<{
+  cacheControl: CacheControlDirectiveResolver<any, any, ContextType>;
   superuser: SuperuserDirectiveResolver<any, any, ContextType>;
 }>;

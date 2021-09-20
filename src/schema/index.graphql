@@ -1,6 +1,19 @@
 "Директива, требующая аутентификации спец. ключом (токеном)"
 directive @superuser on FIELD_DEFINITION
 
+"Тип Cache-Control"
+enum CacheControlScope {
+  PUBLIC
+  PRIVATE
+}
+
+"Директива Cache-Control"
+directive @cacheControl(
+  maxAge: Int
+  scope: CacheControlScope
+  inheritMaxAge: Boolean
+) on FIELD_DEFINITION | OBJECT | INTERFACE | UNION
+
 enum PonyRace {
   "Земная пони"
   Earth
@@ -55,7 +68,7 @@ type Query {
   ): Pony
 
   "Получение всех поней"
-  ponies: [Pony]
+  ponies: [Pony] @cacheControl(maxAge: 900)
 
   """
   Системные запросы для проверки состояния сервиса и тестирования производительности
