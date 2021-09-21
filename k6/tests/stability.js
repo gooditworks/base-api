@@ -18,7 +18,7 @@ const options = {
 }
 
 const test = gqlRequest({
-  url: __ENV.npm_config_url || __ENV.VERCEL_URL,
+  url: __ENV.npm_config_url || `https://${__ENV.VERCEL_URL}`,
   operation: "K6_Realistic",
   query: "query K6_Realistic { health { realistic } }",
   check: {
