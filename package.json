@@ -24,10 +24,10 @@
     "migrate": "sh ./scripts/migrate.sh",
     "release": "standard-version",
     "commit": "git add . && cz",
-    "k6": "concurrently -m 1 -c green \"npm:k6:*\"",
-    "k6:empty": "k6 run -q k6/tests/empty.js",
-    "k6:realistic": "k6 run -q k6/tests/realistic.js",
-    "k6:slow": "k6 run -q --log-output=none k6/tests/slow.js"
+    "k6": "k6 run k6/tests/stability.js",
+    "k6:stress:empty": "k6 run -q k6/tests/empty.js",
+    "k6:stress:realistic": "k6 run -q k6/tests/realistic.js",
+    "k6:stress:slow": "k6 run -q --log-output=none k6/tests/slow.js"
   },
   "devDependencies": {
     "@arkweid/lefthook": "^0.7.6",
