@@ -4,16 +4,16 @@ const options = {
   scenarios: {
     stability: {
       executor: "constant-arrival-rate",
-      duration: "10s",
+      duration: "30s",
       gracefulStop: "1s",
       preAllocatedVUs: 1,
-      maxVUs: 10,
-      rate: 5
+      maxVUs: 5,
+      rate: 1
     }
   },
   thresholds: {
     http_req_failed: ["rate<0.01"],
-    http_req_duration: ["p(95)<300"],
+    http_req_duration: ["med<300"],
   },
 }
 
