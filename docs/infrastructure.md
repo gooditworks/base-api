@@ -81,3 +81,5 @@ Development сервер, который запускается через `npm 
 ```
 $ npm run k6 --url=https://base-api-gooditworks.vercel.app
 ```
+
+Также отдельно лежат stress тесты, имитирующие максимальную нагрузку (`npm run k6:stress:*`), но их опасно запускать на Vercel, он может включить защиту от DDoS.
