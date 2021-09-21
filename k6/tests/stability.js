@@ -4,7 +4,7 @@ const options = {
   scenarios: {
     stability: {
       executor: "constant-arrival-rate",
-      duration: "30s",
+      duration: "3m",
       gracefulStop: "1s",
       preAllocatedVUs: 1,
       maxVUs: 5,
