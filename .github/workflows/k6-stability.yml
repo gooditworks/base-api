@@ -1,0 +1,37 @@
+name: k6 stability test
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: Obtain Vercel preview deploy URL and run k6 test
+    steps:
+      - name: Wait for Vercel deploy
+        run: sleep 10
+      - name: Obtain Vercel preview deploy URL
+        uses: zentered/vercel-preview-url@v1.0.0
+        id: vercel_preview_url
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        with:
+          vercel_team_id: ${{ secrets.VERCEL_TEAM_ID }}
+          vercel_project_id: ${{ secrets.VERCEL_PROJECT_ID }}
+
+      - name: Awaiting Vercel deployment to be ready
+        uses: UnlyEd/github-action-await-vercel@v1.1.1
+        id: await-vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEl_TOKEN }}
+        with:
+          deployment-url: ${{ steps.vercel_preview_url.outputs.preview_url }}
+          timeout: 120
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Run k6 test
+        uses: k6io/action@v0.2.0
+        with:
+          filename: k6/tests/stability.js
+        env:
+          VERCEL_URL: ${{ steps.vercel_preview_url.outputs.preview_url }}
