@@ -11,7 +11,8 @@
   "scripts": {
     "postinstall": "sh ./scripts/add_base_remote.sh",
     "codegen": "graphql-codegen --config codegen.yml",
-    "dev": "nodemon",
+    "dev:local": "nodemon",
+    "dev:vercel": "vercel dev",
     "build": "concurrently -c green \"npm:build:*\"",
     "build:typescript": "npm run prisma:generate && tsc",
     "build:docs": "spectaql spectaql.yaml -t public/docs",
