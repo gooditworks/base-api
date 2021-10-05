@@ -2,6 +2,7 @@ name: Publish and check GraphQL schema
 
 on:
   pull_request:
+    paths: ["src/schema/**"]
 
 jobs:
   schema-publish-and-check:

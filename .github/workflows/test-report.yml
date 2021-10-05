@@ -11,16 +11,6 @@ jobs:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       SUPERUSER_TOKEN: ${{ secrets.SUPERUSER_TOKEN }}
     steps:
-<<<<<<< HEAD
-      - name: Checkout repo
-        uses: actions/checkout@v2
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Run Jest test with junit reporter
-        run: npx jest --ci --testResultsProcessor=jest-junit
-=======
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
@@ -28,7 +18,6 @@ jobs:
 
       - run: npm install
       - run: npx jest --ci --testResultsProcessor=jest-junit
->>>>>>> base/main
 
       - name: Make test report
         uses: dorny/test-reporter@v1
