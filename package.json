@@ -59,7 +59,7 @@
     "micro": "^9.3.4",
     "nodemon": "^2.0.12",
     "prettier": "^2.4.1",
-    "spectaql": "^0.9.0",
+    "spectaql": "^0.9.1",
     "standard-version": "^9.3.1",
     "ts-jest": "^27.0.5",
     "ts-node": "^10.2.1",
