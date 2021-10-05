@@ -3,6 +3,7 @@ name: Publish main variant of GraphQL schema
 on:
   pull_request:
     types: [closed]
+    paths: ["src/schema/**"]
 
 jobs:
   schema-publish-and-check:
