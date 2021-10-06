@@ -8,7 +8,6 @@ jobs:
     name: Build & Test
     runs-on: ubuntu-latest
     env:
-      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       SUPERUSER_TOKEN: ${{ secrets.SUPERUSER_TOKEN }}
     steps:
       - uses: actions/checkout@v2
@@ -17,6 +16,9 @@ jobs:
           node-version: "14"
 
       - run: npm install
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
       - run: npx jest --ci --testResultsProcessor=jest-junit
 
       - name: Make test report
