@@ -39,7 +39,9 @@
 ```
 LOG_LEVEL=<"trace" | "debug" | "info" | "warn" | "error" | "fatal"> (по-умолчанию "trace")
 SENTRY_DSN=<DSN URL от Sentry>
+SENTRY_ENV=<окружение в Sentry (development/production/etc)>
 LOGDNA_KEY=<ключ от logDNA>
+LOGDNA_APP=<название приложение в logDNA, желательно с окончанием текущего окружения (-dev,-prod,-etc)>
 APOLLO_EXPLORER=<"true" включает локальный GraphQL Explorer, в Production Vercel должен быть выключен>
 APOLLO_INTROSPECTION=<"true" включает интроспекцию, в Production Vercel должен быть выключен>
 CORS_ORIGINS=<CORS URL разделенные запятой, для работы Apollo Studio должен включать "https://studio.apollographql.com">
@@ -56,6 +58,8 @@ APOLLO_GRAPH_ID=<ID графа в Apollo Studio>
 ```
 
 Подробнее о Apollo Studio и его фичах можно почитать в [infrastructure.md](docs/infrastructure.md#Apollo%20Studio).
+
+```
 
 ### Файл `src/env.ts`
 

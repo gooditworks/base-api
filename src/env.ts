@@ -14,8 +14,9 @@ const requiredEnv = (name: string) => {
 const env = {
   logLevel: process.env.LOG_LEVEL || "trace",
   sentryDsn: process.env.SENTRY_DSN,
+  sentryEnv: process.env.SENTRY_ENV,
   logdnaKey: process.env.LOGDNA_KEY,
-  logdnaApp: "base",
+  logdnaApp: process.env.LOGDNA_APP,
   apolloKey: process.env.APOLLO_KEY,
   apolloGraphId: process.env.APOLLO_GRAPH_ID,
   apolloExplorer: process.env.APOLLO_EXPLORER,
