@@ -9,7 +9,7 @@ jobs:
       - name: Wait for Vercel deploy
         run: sleep 10
       - name: Obtain Vercel preview deploy URL
-        uses: mxseev/vercel-preview-url@fix/project_id
+        uses: zentered/vercel-preview-url@1.0.6
         id: vercel_preview_url
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
