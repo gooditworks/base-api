@@ -1,10 +1,9 @@
 import {ResolverHandler, HealthResolvers} from "../../types"
-import {ExpectedError} from "../../errors"
 
 type FailResolver = ResolverHandler<HealthResolvers["fail"]>
 
 const fail: FailResolver = (_, {message}) => {
-  throw new ExpectedError(message || undefined)
+  throw new Error(message || "health.fail resolver called")
 }
 
 export default fail

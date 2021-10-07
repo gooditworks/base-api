@@ -1,4 +1,3 @@
-import {ExpectedError} from "../../errors"
 import {callResolver} from "../../utils/testing"
 
 import fail from "./fail"
@@ -6,5 +5,5 @@ import fail from "./fail"
 test("health.fail resolver works correctly", () => {
   const result = () => callResolver(fail, {})
 
-  expect(result).toThrow(ExpectedError)
+  expect(result).toThrow(Error)
 })
