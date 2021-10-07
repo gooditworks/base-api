@@ -1,7 +1,5 @@
-name: Unit tests via Jest
-
-on:
-  pull_request:
+name: Run Jest tests
+on: [pull_request_target]
 
 jobs:
   build-test:
