@@ -67,7 +67,7 @@
   },
   "dependencies": {
     "@gooditworks/monitoring": "^1.2.0",
-    "@graphql-tools/graphql-file-loader": "^7.0.5",
+    "@graphql-tools/graphql-file-loader": "^7.3.0",
     "@graphql-tools/load": "^7.1.8",
     "@graphql-tools/schema": "^8.2.0",
     "@graphql-tools/utils": "^8.2.5",
