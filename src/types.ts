@@ -18,24 +18,28 @@ export type Scalars = {
   Float: number;
 };
 
-
-
 /** Тип Cache-Control */
 export type CacheControlScope =
-  | 'PUBLIC'
-  | 'PRIVATE';
+  | 'PRIVATE'
+  | 'PUBLIC';
 
 /** Результат запроса health */
 export type Health = {
   __typename?: 'Health';
   /** Возвращает простую строку ("void") для проверки того, что сам сервис работает */
   empty: Maybe<Scalars['String']>;
-  /** Медленный запрос, задерживает ответ на duration миллисекунд, а в percent случаях не ответит никогда */
-  slow: Maybe<Scalars['String']>;
-  /** Запрос, имитирующий реальную работу (в первую очередь с базой данных) */
-  realistic: Maybe<Scalars['String']>;
   /** Всегда завершается ошибкой, существует для проверки интеграции Sentry */
   fail: Maybe<Scalars['String']>;
+  /** Запрос, имитирующий реальную работу (в первую очередь с базой данных) */
+  realistic: Maybe<Scalars['String']>;
+  /** Медленный запрос, задерживает ответ на duration миллисекунд, а в percent случаях не ответит никогда */
+  slow: Maybe<Scalars['String']>;
+};
+
+
+/** Результат запроса health */
+export type HealthFailArgs = {
+  message: Maybe<Scalars['String']>;
 };
 
 
@@ -43,12 +47,6 @@ export type Health = {
 export type HealthSlowArgs = {
   duration: Scalars['Int'];
   percent: Scalars['Int'];
-};
-
-
-/** Результат запроса health */
-export type HealthFailArgs = {
-  message: Maybe<Scalars['String']>;
 };
 
 export type Mutation = {
@@ -75,23 +73,23 @@ export type Pony = {
 };
 
 export type PonyRace =
+  /** Аликорн */
+  | 'Alicorn'
   /** Земная пони */
   | 'Earth'
   /** Пегас */
   | 'Pegasus'
   /** Единорог */
-  | 'Unicorn'
-  /** Аликорн */
-  | 'Alicorn';
+  | 'Unicorn';
 
 export type Query = {
   __typename?: 'Query';
-  /** Получение пони по ID */
-  pony: Maybe<Pony>;
-  /** Получение всех поней */
-  ponies: Maybe<Array<Maybe<Pony>>>;
   /** Системные запросы для проверки состояния сервиса и тестирования производительности */
   health: Maybe<Health>;
+  /** Получение всех поней */
+  ponies: Maybe<Array<Maybe<Pony>>>;
+  /** Получение пони по ID */
+  pony: Maybe<Pony>;
 };
 
 
@@ -169,43 +167,45 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = ResolversObject<{
+  Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   CacheControlScope: CacheControlScope;
   Health: ResolverTypeWrapper<Health>;
-  String: ResolverTypeWrapper<Scalars['String']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   Mutation: ResolverTypeWrapper<{}>;
   Pony: ResolverTypeWrapper<Pony>;
   PonyRace: PonyRace;
   Query: ResolverTypeWrapper<{}>;
-  Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+  String: ResolverTypeWrapper<Scalars['String']>;
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = ResolversObject<{
+  Boolean: Scalars['Boolean'];
   Health: Health;
-  String: Scalars['String'];
   Int: Scalars['Int'];
   Mutation: {};
   Pony: Pony;
   Query: {};
-  Boolean: Scalars['Boolean'];
+  String: Scalars['String'];
 }>;
 
-export type CacheControlDirectiveArgs = {   maxAge: Maybe<Scalars['Int']>;
+export type CacheControlDirectiveArgs = {
+  inheritMaxAge: Maybe<Scalars['Boolean']>;
+  maxAge: Maybe<Scalars['Int']>;
   scope: Maybe<CacheControlScope>;
-  inheritMaxAge: Maybe<Scalars['Boolean']>; };
+};
 
 export type CacheControlDirectiveResolver<Result, Parent, ContextType = Context, Args = CacheControlDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
-export type SuperuserDirectiveArgs = {  };
+export type SuperuserDirectiveArgs = { };
 
 export type SuperuserDirectiveResolver<Result, Parent, ContextType = Context, Args = SuperuserDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
 export type HealthResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Health'] = ResolversParentTypes['Health']> = ResolversObject<{
   empty: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  slow: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, RequireFields<HealthSlowArgs, 'duration' | 'percent'>>;
-  realistic: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   fail: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, RequireFields<HealthFailArgs, never>>;
+  realistic: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  slow: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, RequireFields<HealthSlowArgs, 'duration' | 'percent'>>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -221,9 +221,9 @@ export type PonyResolvers<ContextType = Context, ParentType extends ResolversPar
 }>;
 
 export type QueryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
-  pony: Resolver<Maybe<ResolversTypes['Pony']>, ParentType, ContextType, RequireFields<QueryPonyArgs, 'id'>>;
-  ponies: Resolver<Maybe<Array<Maybe<ResolversTypes['Pony']>>>, ParentType, ContextType>;
   health: Resolver<Maybe<ResolversTypes['Health']>, ParentType, ContextType>;
+  ponies: Resolver<Maybe<Array<Maybe<ResolversTypes['Pony']>>>, ParentType, ContextType>;
+  pony: Resolver<Maybe<ResolversTypes['Pony']>, ParentType, ContextType, RequireFields<QueryPonyArgs, 'id'>>;
 }>;
 
 export type Resolvers<ContextType = Context> = ResolversObject<{
