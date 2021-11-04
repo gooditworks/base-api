@@ -1,4 +1,5 @@
 import {VercelApiHandler} from "@vercel/node"
+import {Sentry} from "@gooditworks/monitoring/logger/capturer/sentryNode"
 
 import server from "../src/server"
 import env from "../src/env"
@@ -20,7 +21,10 @@ const handler: VercelApiHandler = async (request, response) => {
     return response.status(200).end()
   }
 
-  return apolloHanlder(request, response)
+  await apolloHanlder(request, response)
+  await Sentry.flush(5000)
+
+  return undefined
 }
 
 const config = {
