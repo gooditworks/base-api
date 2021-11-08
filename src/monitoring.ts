@@ -11,7 +11,7 @@ import {
 import ConsoleTransport from "@gooditworks/monitoring/logger/transport/console"
 import LogdnaNodeTransport from "@gooditworks/monitoring/logger/transport/logdnaNode"
 import ConsoleCapturer from "@gooditworks/monitoring/logger/capturer/console"
-import SentryNodeCapturer from "@gooditworks/monitoring/logger/capturer/sentryNode"
+import SentryCapturer, {Sentry} from "@gooditworks/monitoring/logger/capturer/sentryNode"
 
 import env from "./env"
 
@@ -26,7 +26,7 @@ if (env.logdnaKey) {
 
 const exceptionCapturers = [new ConsoleCapturer()]
 if (env.sentryDsn) {
-  const sentryCapturer = new SentryNodeCapturer({
+  const sentryCapturer = new SentryCapturer({
     dsn: env.sentryDsn,
     environment: env.sentryEnv
   })
@@ -92,6 +92,8 @@ const logErrors = async (context: GraphQLRequestErrorContext) => {
       variables: context.request.variables
     })
   })
+
+  await Sentry.flush(5000)
 }
 
 // https://blog.sentry.io/2020/07/22/handling-graphql-errors-using-sentry
