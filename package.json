@@ -45,7 +45,7 @@
     "@types/lodash": "^4.14.176",
     "@types/micro": "^7.3.6",
     "@typescript-eslint/eslint-plugin": "^5.3.1",
-    "@typescript-eslint/parser": "^5.3.1",
+    "@typescript-eslint/parser": "^5.4.0",
     "commitizen": "^4.2.4",
     "commitlint-plugin-function-rules": "^1.5.1",
     "concurrently": "^6.4.0",
