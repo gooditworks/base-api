@@ -8,6 +8,7 @@ datasource db {
 generator client {
   provider = "prisma-client-js"
   previewFeatures = ["referentialIntegrity"]
+  output = "./client"
 }
 
 enum PonyRace {
