@@ -55,7 +55,7 @@
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-airbnb-typescript": "^16.1.0",
     "eslint-plugin-jest": "^25.3.0",
-    "jest": "^27.4.3",
+    "jest": "^27.4.5",
     "jest-junit": "^13.0.0",
     "micro": "^9.3.4",
     "nodemon": "^2.0.15",
