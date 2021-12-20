@@ -5,5 +5,5 @@
 /.env
 /build
 /public/docs
-/prisma/client
+/src/generated/prisma
 .vercel
