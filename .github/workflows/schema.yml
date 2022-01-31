@@ -1,11 +1,11 @@
-name: Publish and check GraphQL schema
+name: Check GraphQL schema breaking changes
 
 on:
   pull_request:
     paths: ["src/schema/**"]
 
 jobs:
-  schema-publish-and-check:
+  schema-check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -13,12 +13,6 @@ jobs:
 
       - name: Install Apollo Rover (cli)
         run: npm install --global @apollo/rover
-
-      - name: Publish a 'branch' variant of schema
-        run: rover graph publish ${{ env.APOLLO_GRAPH_ID }}@${{ github.head_ref }} --schema ./src/schema/index.graphql
-        env:
-          APOLLO_KEY: ${{ secrets.APOLLO_KEY }}
-          APOLLO_GRAPH_ID: ${{ secrets.APOLLO_GRAPH_ID }}
 
       - name: Check schema against main variant
         run: rover graph check ${{ env.APOLLO_GRAPH_ID }}@main --schema ./src/schema/index.graphql
