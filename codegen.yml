@@ -6,7 +6,7 @@ generates:
       avoidOptionals: true
       useIndexSignature: true
       enumsAsTypes: true
-      contextType: ./src/context#Context
+      contextType: ./context#Context
     plugins:
       - typescript
       - typescript-resolvers
