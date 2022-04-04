@@ -59,7 +59,7 @@
     "jest-junit": "13.0.0",
     "micro": "9.3.4",
     "nodemon": "2.0.15",
-    "spectaql": "0.15.0",
+    "spectaql": "1.0.5",
     "prettier": "2.6.1",
     "standard-version": "9.3.2",
     "ts-jest": "27.1.4",
