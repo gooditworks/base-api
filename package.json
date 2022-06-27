@@ -56,7 +56,7 @@
     "eslint-config-airbnb-typescript": "17.0.0",
     "eslint-plugin-jest": "26.5.3",
     "jest": "28.1.1",
-    "jest-junit": "13.2.0",
+    "jest-junit": "14.0.0",
     "micro": "9.3.4",
     "nodemon": "2.0.16",
     "spectaql": "1.2.3",
