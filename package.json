@@ -75,7 +75,7 @@
     "micro": "9.4.0",
     "nodemon": "2.0.19",
     "prettier": "2.7.1",
-    "sort-package-json": "^1.57.0",
+    "sort-package-json": "1.57.0",
     "spectaql": "1.4.1",
     "standard-version": "9.5.0",
     "ts-jest": "28.0.7",
